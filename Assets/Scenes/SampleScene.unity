@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -271,9 +272,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Pathfinding
   start: {x: 6, y: 3}
   goal: {x: 3, y: 5}
-  height: 8
-  width: 8
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6844ad2ceb21db44198752362fbc30b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GenerateRandomGrid
+  height: 7
+  width: 7
   obstacleProbability: 0.25
+  obstaclePosition: {x: 0, y: 0}
+  pathfinding: {fileID: 330585548}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,8 +10,6 @@ public class Pathfinding : MonoBehaviour
     private Vector2Int next;
     private Vector2Int current;
 
-    [SerializeField] private Vector2Int obstaclePosition;
-
     private Vector2Int[] directions = new Vector2Int[]
     {
         new Vector2Int(1, 0),
@@ -29,13 +27,8 @@ public class Pathfinding : MonoBehaviour
         { 0, 0, 0, 0, 0 }
     };
 
-    [SerializeField] private int height, width;
-    [SerializeField] 
-    [Range(0, 1)] private float obstacleProbability;
-
     private void Start()
     {
-        GenerateRandomGrid(width, height, obstacleProbability);
         FindPath(start, goal);
     }
 
@@ -77,6 +70,8 @@ public class Pathfinding : MonoBehaviour
 
     private void FindPath(Vector2Int start, Vector2Int goal)
     {
+        path.Clear();
+
         Queue<Vector2Int> frontier = new Queue<Vector2Int>();
         frontier.Enqueue(start);
 
@@ -121,38 +116,18 @@ public class Pathfinding : MonoBehaviour
         path.Reverse();
     }
 
-    //Generates the grid
-    void GenerateRandomGrid(int width, int height, float obstacleProbability)
+    public void RefindPath()
     {
-        //Creates the grid based on height and width
-        grid = new int[height, width];
-
-        //Randomly spawn in obstacles
-        for(int i = 0; i < height; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
-                float random = Random.Range(0f,1f);
-                print(random);
-                if (random < obstacleProbability)
-                    AddObstacle(new Vector2Int(i, j));
-            }
-        }
+        FindPath(start, goal);
     }
 
-    public void AddObstacle(Vector2Int position)
+    //Sets grid
+    public void SetGrid(int[,] newGrid)
     {
-        grid[position.x, position.y] = 1;
+        grid = newGrid;
     }
 
 #if UNITY_EDITOR
-    [ContextMenu("Add Obstacle")]
-    //AddObstacle
-    private void AddObstacleMenu()
-    {
-         AddObstacle(obstaclePosition);
-    }
-
     [ContextMenu("Find Path")]
     private void FindPathMenu()
     {
